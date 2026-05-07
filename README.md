@@ -27,8 +27,9 @@ npm run dev
  
 ## Environment Variables
  
-MONGO_URI=
-JWT_SECRET=
+MONGO_URI
+
+JWT_SECRET
  
 ## Live Demo
 Frontend:
