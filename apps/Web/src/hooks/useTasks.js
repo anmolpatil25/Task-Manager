@@ -64,10 +64,57 @@ export const useTasks = () => {
     }
   };
 
+  const updateTask = async (id, updatedData) => {
+  try {
+    const token = localStorage.getItem("token");
+ 
+    const res = await API.put(
+      `/tasks/${id}`,
+      updatedData,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+ 
+    await fetchTasks();
+ 
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+ 
+const deleteTask = async (id) => {
+  try {
+    const token = localStorage.getItem("token");
+ 
+    const res = await API.delete(
+      `/tasks/${id}`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+ 
+    await fetchTasks();
+ 
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
   return {
     tasks,
     loading,
     createTask,
+    updateTask,
+    deleteTask,
     refetch: fetchTasks,
   };
 };
