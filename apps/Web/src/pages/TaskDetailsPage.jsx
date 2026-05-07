@@ -19,11 +19,11 @@ const TaskDetailsPage = () => {
   const { tasks, loading, updateTask, deleteTask } = useTasks();
   const [deleting, setDeleting] = useState(false);
 
-  const task = tasks.find(t => t.id === id);
+  const task = tasks.find(t => (t._id || t.id)?.toString()===id);
 
   const handleStatusChange = async (newStatus) => {
     try {
-      await updateTask(id, { status: newStatus });
+      await updateTask(task._id || task.id, { status: newStatus });
       toast.success('Task status updated');
     } catch (err) {
       toast.error('Failed to update status');
